@@ -6,7 +6,7 @@ namespace LoopLib
 {
     public abstract class EntityList
     {
-        public abstract void InitFrom(Snapshot prev);
+        public abstract void InitFrom(Snapshot prev, List<IExecutable> mutations);
         public abstract int Length { get; }
 
         public abstract IEntityState GetRaw(int pos);
@@ -44,7 +44,7 @@ namespace LoopLib
             this.laggedView = laggedView;
         }
 
-        public override void InitFrom(Snapshot prev)
+        public override void InitFrom(Snapshot prev, List<IExecutable> mutations)
         {
             var prevList = (EntityList<T>)prev.EntityLists[EntityType.TypeId];
             int len = Entities.Length;
@@ -54,12 +54,15 @@ namespace LoopLib
             for (int i = 0; i < len; i++)
             {
                 if (prevList.Entities[i] == null)
+                {
+                    Entities[i] = null;
                     continue;
+                }
 
                 random.State = (UInt32)(baseSeed ^ (i * 29387).GetHashCode());
                 int owner = EntityType.Owners[i];
                 laggedView.ClientID = owner;
-                EntityType.UpdateEntity(prevList.Entities[i].Value, random, owner, laggedView, out Entities[i]);
+                EntityType.UpdateEntity(prevList.Entities[i].Value, mutations.Add, random, owner, laggedView, out Entities[i]);
             }
         }
 

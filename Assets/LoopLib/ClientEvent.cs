@@ -11,5 +11,7 @@ namespace LoopLib
         public float RealTime;
 
         public float MoveHoriz;
+        public float TurretMove;
+        public bool TurretTigger;
     }
 }

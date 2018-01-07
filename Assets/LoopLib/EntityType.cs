@@ -59,14 +59,14 @@ namespace LoopLib
             return new EntityList<T>(this, view);
         }
 
-        public virtual void UpdateEntity(T entity, DeterministicRandom random, int owner, LaggedView view, out T? newVal)
+        public virtual void UpdateEntity(T entity, Action<IExecutable> addMutation, DeterministicRandom random, int owner, LaggedView view, out T? newVal)
         {
             newVal = entity;
         }
 
         public virtual T Interpolate(T second, T first, float amount)
         {
-            T result = first;
+            T result = second;
 
             result.X = first.X * amount + second.X * (1 - amount);
             result.Y = first.Y * amount + second.Y * (1 - amount);

@@ -2,7 +2,7 @@
 
 namespace LoopLib
 {
-    class Wave
+    public class Wave
     {
         public int FrameNumber;
         public Universe Universe;
@@ -27,24 +27,33 @@ namespace LoopLib
             if (eventFrame > FrameNumber)
                 throw new ArgumentException("Event happening in the future.");
 
-            Universe.Frames[eventFrame].ClientEvents[e.DrivingEntityId] = e;
+            Universe.Frames[eventFrame + 1].ClientEvents[e.DrivingEntityId] = e;
             var oldFrame = FrameNumber;
-            FrameNumber = eventFrame - 1;
+            FrameNumber = eventFrame;
             // Fast forward from event time to wave now
             Advance(oldFrame - eventFrame);
 
         }
 
-        public void SetGameTime(float gameTime)
+        private float _gameTime;
+        public float GameTime
         {
-            var newNumber = ((int)Math.Floor(gameTime * Universe.TickRate)) + 1;
-            if(newNumber < FrameNumber)
-                throw new ArgumentException("Unable to rewind time.");
+            get
+            {
+                return _gameTime;
+            }
+            set
+            {
+                _gameTime = value;
+                var newNumber = ((int)Math.Floor(value * Universe.TickRate)) + 1;
+                if (newNumber < FrameNumber)
+                    throw new ArgumentException("Unable to rewind time.");
 
-            int delta = newNumber - FrameNumber;
-            if(delta > 0)
-                Advance(delta);
+                int delta = newNumber - FrameNumber;
+                if (delta > 0)
+                    Advance(delta);
 
+            }
         }
     }
 }

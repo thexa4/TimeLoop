@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1060391696133020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.3718114, y: -1.2835939, z: 0.067881405}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4725904837721056}
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1005024709421988}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6574543, y: 0.37251377, z: -0.060507745}
+  m_LocalPosition: {x: 0, y: -0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4245304156152888}
@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1173567612635926}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6554543, y: 0.82351387, z: -0.060507745}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4245304156152888}
@@ -124,7 +124,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009318710113970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6764543, y: 1.1295137, z: -0.060507745}
+  m_LocalPosition: {x: 0, y: 0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4245304156152888}
@@ -143,9 +143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Turret: {fileID: 1009318710113970}
   BodySprite: {fileID: 212790422239130820}
+  boom: {fileID: 1900201747203452, guid: 83211fe8ac9916c40a44e32cb0c09a91, type: 2}
   TankId: 0
   Color: {r: 1, g: 1, b: 1, a: 1}
   GameController: {fileID: 0}
+  live: 1
 --- !u!212 &212626775098971090
 SpriteRenderer:
   m_ObjectHideFlags: 1
