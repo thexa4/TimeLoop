@@ -8,6 +8,9 @@ namespace LoopLib
     {
         public abstract void InitFrom(Snapshot prev);
         public abstract int Length { get; }
+
+        public abstract IEntityState GetRaw(int pos);
+
     }
 
     public class EntityList<T> : EntityList where T : struct, IEntityState
@@ -28,6 +31,10 @@ namespace LoopLib
                 Entities[pos] = value;
             }
         }
+        public override IEntityState GetRaw(int pos)
+        {
+            return this[pos]
+;        }
         public override int Length { get { return Entities.Length; } }
 
         public EntityList(EntityType<T> type, LaggedView laggedView)
@@ -39,19 +46,20 @@ namespace LoopLib
 
         public override void InitFrom(Snapshot prev)
         {
+            var prevList = (EntityList<T>)prev.EntityLists[EntityType.TypeId];
             int len = Entities.Length;
 
-            long baseSeed = EntityType.BaseSeed ^ prev.FrameIndex.GetHashCode();
+            long baseSeed = EntityType.BaseSeed ^ (prev.FrameIndex * 1299827).GetHashCode();
 
             for (int i = 0; i < len; i++)
             {
-                if (Entities[i] == null)
+                if (prevList.Entities[i] == null)
                     continue;
 
-                random.State = (UInt32)(baseSeed ^ i.GetHashCode());
+                random.State = (UInt32)(baseSeed ^ (i * 29387).GetHashCode());
                 int owner = EntityType.Owners[i];
                 laggedView.ClientID = owner;
-                EntityType.UpdateEntity(Entities[i].Value, random, owner, laggedView, out Entities[i]);
+                EntityType.UpdateEntity(prevList.Entities[i].Value, random, owner, laggedView, out Entities[i]);
             }
         }
 

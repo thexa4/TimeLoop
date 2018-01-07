@@ -9,7 +9,7 @@ namespace LoopLib
         public int TotalGameSeconds { get; private set; }
         public Snapshot[] Frames { get; private set; }
         public int LagCompensation { get; private set; }
-        
+       
         public Universe(int tickRate, int totalGameSeconds, int lagCompensationFrames, IEnumerable<EntityType> entityTypes)
         {
             TickRate = tickRate;

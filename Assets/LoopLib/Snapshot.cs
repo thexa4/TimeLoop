@@ -8,14 +8,17 @@ namespace LoopLib
         public int FrameIndex { get; private set; }
         public readonly EntityList[] EntityLists;
         public readonly List<IExecutable> Mutations;
-        public readonly List<ClientEvent> ClientEvents;
+        public readonly Dictionary<int, ClientEvent> ClientEvents;
+
+        private List<EntityType> entityTypes;
 
         public Snapshot(int frameIndex, List<EntityType> entityTypes, Snapshot laggedSnapshot)
         {
             FrameIndex = frameIndex;
             EntityLists = new EntityList[entityTypes.Count];
             Mutations = new List<IExecutable>();
-            ClientEvents = new List<ClientEvent>();
+            ClientEvents = new Dictionary<int, ClientEvent>();
+            this.entityTypes = entityTypes;
 
             foreach (var type in entityTypes)
             {
@@ -30,6 +33,13 @@ namespace LoopLib
             int types = EntityLists.Length;
             for (int i = 0; i < types; i++)
                 EntityLists[i].InitFrom(prev);
+
+            foreach(var e in ClientEvents.Values)
+            {
+                var entityType = entityTypes[e.DrivingTypeId];
+                var data = EntityLists[e.DrivingTypeId].GetRaw(e.DrivingEntityId);
+                entityType.HandleClientEvent(e, Mutations.Add, data);
+            }
 
             int mutations = prev.Mutations.Count;
             for (int i = 0; i < mutations; i++)

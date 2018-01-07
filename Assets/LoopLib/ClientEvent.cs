@@ -5,9 +5,11 @@ namespace LoopLib
 {
     public struct ClientEvent
     {
-        public readonly int DrivingTypeId;
-        public readonly int DrivingEntityId;
-        public readonly float GameTime;
-        public readonly float RealTime;
+        public int DrivingTypeId;
+        public int DrivingEntityId;
+        public float GameTime;
+        public float RealTime;
+
+        public float MoveHoriz;
     }
 }

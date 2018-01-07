@@ -12,10 +12,10 @@ namespace LoopLib
 
     public struct MutationEvent<T, D> : IExecutable where T : struct, IEntityState
     {
-        public readonly EntityType<T> EntityType;
-		public readonly int EntityId;
-        public readonly EntityMutator<T, D> Mutator;
-        public readonly D Args;
+        public EntityType<T> EntityType;
+		public int EntityId;
+        public EntityMutator<T, D> Mutator;
+        public D Args;
 
         public void Execute(Snapshot destination)
         {

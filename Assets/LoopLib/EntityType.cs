@@ -15,6 +15,8 @@ namespace LoopLib
             TypeId = -1;
         }
 
+        public abstract void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, IEntityState entityData);
+
         public abstract EntityList CreateEntityList(Snapshot current, Snapshot laggedSnapshot);
 
         public void Initialize(int id)
@@ -45,6 +47,12 @@ namespace LoopLib
             Owners = new int[maxEntities];
         }
 
+        public sealed override void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, IEntityState entityData)
+        {
+            HandleClientEvent(e, addMutation, (T)entityData);
+        }  
+        public virtual void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, T entityData) { }
+
         public sealed override EntityList CreateEntityList(Snapshot current, Snapshot laggedSnapshot)
         {
             LaggedView view = new LaggedView(current, laggedSnapshot);
@@ -56,9 +64,7 @@ namespace LoopLib
             newVal = entity;
         }
 
-        public virtual void HandleClientEvent(ClientEvent e, ClientView view, EntityType type) {}
-
-        public virtual T Interpolate(T first, T second, float amount)
+        public virtual T Interpolate(T second, T first, float amount)
         {
             T result = first;
 
@@ -68,7 +74,7 @@ namespace LoopLib
             return result;
         }
 
-        public EntityId CreateNew(Snapshot snapshot, int clientId)
+        public EntityId CreateNew(int clientId)
         {
             if (NextEntityId > MaxEntities)
                 throw new InvalidOperationException("Too many entities created of type: " + Name);
