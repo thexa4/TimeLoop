@@ -8,7 +8,7 @@ namespace Containers
         public Wave Wave;
         public int ClientId;
 
-        public LoopLib.ClientView Client { get; private set; }
+        public LoopLib.ClientState Client { get; private set; }
         private Dictionary<LoopLib.EntityType, int> nextIds = new Dictionary<LoopLib.EntityType, int>();
 
         public int GetNextId(LoopLib.EntityType type)
@@ -20,7 +20,7 @@ namespace Containers
 
         public void Update()
         {
-            Client = new LoopLib.ClientView(Wave.LoopWave.Universe, Wave.LoopWave.GameTime, ClientId);
+            Client = new LoopLib.ClientState(Wave.LoopWave.Universe, Wave.LoopWave.GameTime, ClientId);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Containers
         public virtual void Start()
         {
             Id = Client.GetNextId(Type.LoopType);
-            gameObject.SetActive(false);
         }
 
         public void Update()
@@ -26,7 +25,7 @@ namespace Containers
             OnUpdate(view);
         }
 
-        public virtual void OnUpdate(LoopLib.ClientView view)
+        public virtual void OnUpdate(LoopLib.ClientState view)
         {
 
         }

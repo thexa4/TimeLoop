@@ -59,13 +59,14 @@ public class TankEntity : LoopLib.EntityType<TankData>
         victim = newData;
     }
 
-    public override void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, TankData entityData)
+    public override void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, TankData? entityData)
     {
         var mutationEvent = new MutationEvent<TankData, float>
         {
             EntityType = this,
             EntityId = e.DrivingEntityId,
-            Mutator = (ref TankData? victim, float data, List<IExecutable> mutations) => {
+            Mutator = (ref TankData? victim, float data, List<IExecutable> mutations) =>
+            {
                 if (!victim.HasValue)
                 {
                     return;
@@ -77,12 +78,16 @@ public class TankEntity : LoopLib.EntityType<TankData>
             },
             Args = e.MoveHoriz,
         };
-        addMutation(mutationEvent);
+        if (e.MoveHoriz != 0f)
+        {
+            addMutation(mutationEvent);
+        }
         var mutationEventTurret = new MutationEvent<TankData, float>
         {
             EntityType = this,
             EntityId = e.DrivingEntityId,
-            Mutator = (ref TankData? victim, float data, List<IExecutable> mutations) => {
+            Mutator = (ref TankData? victim, float data, List<IExecutable> mutations) =>
+            {
                 if (!victim.HasValue)
                 {
                     return;
@@ -94,14 +99,17 @@ public class TankEntity : LoopLib.EntityType<TankData>
             },
             Args = e.TurretMove,
         };
-        addMutation(mutationEventTurret);
+        if (e.TurretMove != 0f)
+        {
+            addMutation(mutationEventTurret);
+        }
 
-        if (e.TurretTigger)
+        if (e.TurretTigger && entityData.HasValue)
         {
             var mutationEventShell = new MutationEvent<ShellData, float>
             {
-                EntityType = (EntityType<ShellData>)entityData.ShellId.Type,
-                EntityId = entityData.ShellId.Id,
+                EntityType = (EntityType<ShellData>)entityData.Value.ShellId.Type,
+                EntityId = entityData.Value.ShellId.Id,
                 Mutator = (ref ShellData? victim, float data, List<IExecutable> mutations) =>
                 {
                     if (victim.HasValue)
@@ -110,15 +118,29 @@ public class TankEntity : LoopLib.EntityType<TankData>
                     }
                     victim = new ShellData
                     {
-                        X = entityData.X,
-                        Y = entityData.Y,
-                        XSpeed = Mathf.Cos(entityData.TurretAngle / 180 * Mathf.PI),
-                        YSpeed = Mathf.Sin(entityData.TurretAngle / 180 * Mathf.PI),
+                        X = entityData.Value.X,
+                        Y = entityData.Value.Y,
+                        XSpeed = Mathf.Cos(entityData.Value.TurretAngle / 180 * Mathf.PI),
+                        YSpeed = Mathf.Sin(entityData.Value.TurretAngle / 180 * Mathf.PI),
                     };
                 },
-                Args = entityData.TurretAngle,
+                Args = entityData.Value.TurretAngle,
             };
             addMutation(mutationEventShell);
+        }
+
+        if (e.NewTankId.HasValue && e.NewShellId.HasValue && e.NewTankTigger)
+        {
+            var mutationEventNewTank = new MutationEvent<TankData, TankData>
+            {
+                EntityType = this,
+                EntityId = e.NewTankId.Value.Id,
+                Mutator = (ref TankData? victim, TankData data, List<IExecutable> mutations) => {
+                    victim = data;
+                },
+                Args = new TankData { X = 0, ShellId = e.NewShellId.Value },
+            };
+            addMutation(mutationEventNewTank);
         }
     }
 

@@ -19,6 +19,7 @@ namespace LoopLib
             TypeId = -1;
             Name = name;
             Owners = new int[maxEntities];
+            MaxEntities = maxEntities;
         }
 
         public abstract void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, IEntityState entityData);
@@ -57,9 +58,9 @@ namespace LoopLib
 
         public sealed override void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, IEntityState entityData)
         {
-            HandleClientEvent(e, addMutation, (T)entityData);
+            HandleClientEvent(e, addMutation, (T?)entityData);
         }  
-        public virtual void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, T entityData) { }
+        public virtual void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, T? entityData) { }
 
         public sealed override EntityList CreateEntityList(Snapshot current, Snapshot laggedSnapshot)
         {

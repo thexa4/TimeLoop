@@ -31,10 +31,12 @@ namespace LoopLib
                 Entities[pos] = value;
             }
         }
+
         public override IEntityState GetRaw(int pos)
         {
-            return this[pos]
-;        }
+            return this[pos];
+        }
+
         public override int Length { get { return Entities.Length; } }
 
         public EntityList(EntityType<T> type, LaggedView laggedView)

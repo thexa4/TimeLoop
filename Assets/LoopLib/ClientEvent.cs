@@ -13,5 +13,8 @@ namespace LoopLib
         public float MoveHoriz;
         public float TurretMove;
         public bool TurretTigger;
+        public EntityId? NewTankId;
+        public EntityId? NewShellId;
+        public bool NewTankTigger;
     }
 }

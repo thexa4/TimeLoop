@@ -7,7 +7,7 @@ public class ShellView : Containers.LoopEntity {
     public GameObject ExplosionPrefab;
     public RadialTransfrom RadTransform;
 
-    public override void OnUpdate (ClientView view)
+    public override void OnUpdate (ClientState view)
     {
         var shell = view.Get((ShellEntity)Type.LoopType, Id);
         if (shell != null)

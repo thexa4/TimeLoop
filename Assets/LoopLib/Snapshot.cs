@@ -37,9 +37,10 @@ namespace LoopLib
             foreach(var e in ClientEvents.Values)
             {
                 var entityType = entityTypes[e.DrivingTypeId];
-                var data = EntityLists[e.DrivingTypeId].GetRaw(e.DrivingEntityId);
-                if (data != null)
-                    entityType.HandleClientEvent(e, Mutations.Add, data);
+                var something = EntityLists[e.DrivingTypeId];
+                var data = something.GetRaw(e.DrivingEntityId);
+                //if (data != null)
+                entityType.HandleClientEvent(e, Mutations.Add, data);
             }
 
             int mutations = prev.Mutations.Count;

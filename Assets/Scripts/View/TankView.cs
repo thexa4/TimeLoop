@@ -11,25 +11,28 @@ public class TankView : Containers.LoopEntity
     public GameObject[] Bodies;
     public GameObject ExplosionPrefab;
     public RadialTransfrom RadTransfrom;
+    public GameObject Sprites;
 
-    public bool live = true;
+    private bool _isLive = false;
+
+    public bool IsLive { get { return _isLive; } }
 
     // Use this for initialization
     public override void Start()
     {
         base.Start();
-        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    public override void OnUpdate(ClientView view)
+    public override void OnUpdate(ClientState view)
     {
         var tank = view.Get((TankEntity)Type.LoopType, Id);
        
         if (tank != null)
         {
-            gameObject.SetActive(true);
-            foreach(var body in Bodies)
+            _isLive = true;
+            Sprites.SetActive(true);
+            foreach (var body in Bodies)
             {
                 body.SetActive(false);
             }
@@ -40,9 +43,10 @@ public class TankView : Containers.LoopEntity
         }
         else
         {
-            if (live && gameObject.activeSelf)
+            Sprites.SetActive(false);
+            if (_isLive && Sprites.activeSelf)
             {
-                live = false;
+                _isLive = false;
                 var go = GameObject.Instantiate(ExplosionPrefab);
                 go.transform.SetParent(gameObject.transform.parent, false);
                 go.transform.localPosition = gameObject.transform.localPosition + new Vector3(0.2f, 0.1f, -1f);
@@ -55,7 +59,6 @@ public class TankView : Containers.LoopEntity
                 go.transform.SetParent(gameObject.transform.parent, false);
                 go.transform.localPosition = gameObject.transform.localPosition + new Vector3(-0.1f, 0.3f, -1f);
             }
-            //gameObject.SetActive(false);
         }
     }
 }
