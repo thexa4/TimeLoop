@@ -7,7 +7,6 @@ public class ShellView : MonoBehaviour {
 
     [Header("Shell Settings")]
     public int ShellId;
-    public GameController GameController;
 
     public GameObject BoomPrefab;
 
@@ -20,14 +19,14 @@ public class ShellView : MonoBehaviour {
 	// Update is called once per frame
 	public void OnUpdate (ClientView view)
     {
-        var shell = view.Get(GameController.ShellEnityType, ShellId);
-        if(shell != null)
+       // var shell = view.Get(GameController.ShellEnityType, ShellId);
+        /*if(shell != null)
         {
             gameObject.SetActive(true);
             transform.localPosition = new Vector3(shell.Value.X, shell.Value.Y, 0);
             transform.rotation = Quaternion.LookRotation(Vector3.forward, new Vector3(shell.Value.XSpeed, shell.Value.YSpeed, 0f));
         }
-        else
+        else*/
         {
             if (gameObject.activeSelf)
             {
