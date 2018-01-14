@@ -5,27 +5,15 @@ using LoopLib;
 
 public class TankView : MonoBehaviour
 {
+    [Header("Tank Settings")]
+    public int TankId;
+    public GameController GameController;
 
     [Header("View Settings")]
     public GameObject Turret;
-    public SpriteRenderer BodySprite;
     public GameObject boom;
-
-
-    [Header("Tank Settings")]
-    public int TankId;
-    public Color Color;
-    public GameController GameController;
-
+    
     public bool live = true;
-
-    public void OnValidate()
-    {
-        if (BodySprite != null)
-        {
-            BodySprite.color = Color;
-        }
-    }
 
     // Use this for initialization
     void Start()
@@ -59,9 +47,6 @@ public class TankView : MonoBehaviour
                 go = GameObject.Instantiate(boom);
                 go.transform.SetParent(gameObject.transform.parent, false);
                 go.transform.localPosition = gameObject.transform.localPosition + new Vector3(-0.1f, 0.3f, -1f);
-
-                Color = Color.black;
-                OnValidate();
             }
             //gameObject.SetActive(false);
         }
