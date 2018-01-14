@@ -28,7 +28,8 @@ namespace Containers
 
         public void Update()
         {
-            LoopWave.GameTime += Time.deltaTime;
+            GameTime += Time.deltaTime;
+            LoopWave.GameTime = GameTime;
         }
 
     }
