@@ -10,7 +10,7 @@ namespace Containers
     public class LoopEntity : MonoBehaviour
     {
         public EntityType Type;
-        public ClientAgent Client;
+        public ClientInput Client;
 
         protected LoopLib.EntityId id;
 

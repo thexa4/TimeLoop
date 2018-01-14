@@ -1,17 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using LoopLib;
 
-public class ClientAgent: MonoBehaviour {
+public class ClientInput: MonoBehaviour {
 
     public Containers.Wave Wave;
-    public int ClientId;
+    public int ClientId;   
 
     public void Update()
     {
-        var view = new ClientView(Wave.LoopWave.Universe, wave.GameTime, ClientId);
-        
         var inputEvent = new ClientEvent
         {
             MoveHoriz = Input.GetAxis("MoveTank" + ClientId) * 0.1f,
