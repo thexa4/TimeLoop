@@ -5,8 +5,8 @@ using LoopLib;
 
 public class ShellView : Containers.LoopEntity {
 
-    [Header("Shell Settings")]
-    public GameObject BoomPrefab;
+    [Header("View Settings")]
+    public GameObject ExplosionPrefab;
 
     // Update is called once per frame
     public override void OnUpdate (ClientView view)
@@ -22,7 +22,7 @@ public class ShellView : Containers.LoopEntity {
         {
             if (gameObject.activeSelf)
             {
-                var go = GameObject.Instantiate(BoomPrefab);
+                var go = GameObject.Instantiate(ExplosionPrefab);
                 go.transform.SetParent(gameObject.transform.parent, false);
                 go.transform.localPosition = new Vector3(transform.localPosition.x,0f);
 
