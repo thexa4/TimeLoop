@@ -1,4 +1,6 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 Shader "Draw/WorldShader"
 {
@@ -9,7 +11,7 @@ Shader "Draw/WorldShader"
 	SubShader
 	{
 		// No culling or depth
-		Cull Off ZWrite Off ZTest Always
+		//Cull On ZWrite On ZTest Always
 
 		Pass
 		{
@@ -22,6 +24,7 @@ Shader "Draw/WorldShader"
 			struct appdata
 			{
 				float4 vertex : POSITION;
+				float4 normal : NORMAL;
 				float2 uv : TEXCOORD0;
 			};
 
@@ -29,8 +32,11 @@ Shader "Draw/WorldShader"
 			{
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
+				float4 normal : NORMAL;
 				float4 rayEnd : TEXCOORD1;
 				float3 rayDirection : TEXCOORD2;
+				float4 objectPos : TEXCOORD3;
+				float3 worldNormal : TEXCOORD4;
 			};
 
 			v2f vert (appdata v)
@@ -41,7 +47,10 @@ Shader "Draw/WorldShader"
 
 				o.rayEnd = mul(v.vertex, unity_ObjectToWorld);
 				o.rayDirection = o.rayEnd - _WorldSpaceCameraPos;
+				o.normal = v.normal;
+				o.worldNormal = UnityObjectToWorldNormal(v.normal);
 
+				o.objectPos = v.vertex;
 
 				return o;
 			}
@@ -83,7 +92,27 @@ Shader "Draw/WorldShader"
 
 				float3 direction = far - near;
 
-				return float4(distance_cylinder(i.rayEnd - i.rayDirection, 0), 1);
+				//  return float4(distance_cylinder(i.rayEnd - i.rayDirection, 0), 1);
+
+				float sunRadius = 200;
+				float time = i.objectPos.y * 10 + _Time[0];
+
+				float4 lightpos = float4(sin(time), 0, cos(time), 1);
+
+				float4 samplePos = i.objectPos;
+				samplePos.y *= 10;
+
+				float4 relativeLightDirection = normalize(samplePos - lightpos);
+				
+				//return lightpos;
+				float sunIntensity = dot(relativeLightDirection, i.normal);
+
+				float surfaceAngle = dot(i.worldNormal, -normalize(i.rayDirection));
+				//return surfaceAngle;
+
+				float4 color = sunIntensity * float4(1, 1, 1, 1) + (1 - sunIntensity) * float4(0.55, 0.55, 0.8, 1);
+				return surfaceAngle * color;
+
 				//return float4(i.rayDirection, 1);
 			}
 			ENDCG
