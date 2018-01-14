@@ -4,7 +4,7 @@ public class RadialTransfrom : MonoBehaviour
 {
 
     [SerializeField]
-    public float _worldSize = 50f;
+    public GameObject _world;
 
     [SerializeField]
     public float _height = 0f;
@@ -19,12 +19,7 @@ public class RadialTransfrom : MonoBehaviour
     {
         get
         {
-            return _worldSize;
-        }
-        set
-        {
-            _worldSize = value;
-            Reposition();
+            return _world.transform.localScale.x / 2;
         }
     }
 
