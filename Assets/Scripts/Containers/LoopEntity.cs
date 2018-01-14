@@ -7,11 +7,21 @@ using Containers;
 
 namespace Containers
 {
-    class LoopEntity : MonoBehaviour
+    public class LoopEntity : MonoBehaviour
     {
         public EntityType Type;
         public ClientAgent Client;
 
+        protected LoopLib.EntityId id;
 
+        public void Start()
+        {
+            id = Type.LoopType.CreateNew(Client.ClientId);
+        }
+
+        public void Update()
+        {
+            var view = Client
+        }
     }
 }

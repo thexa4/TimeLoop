@@ -9,10 +9,14 @@ namespace LoopLib
     public abstract class EntityType
     {
         public int TypeId { get; private set; }
+        public int MaxEntities { get; private set; }
+        public int NextEntityId { get; private set; }
+        public readonly int[] Owners;
 
-        public EntityType()
+        public EntityType(int maxEntities)
         {
             TypeId = -1;
+            Owners = new int[maxEntities];
         }
 
         public abstract void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, IEntityState entityData);
@@ -26,6 +30,15 @@ namespace LoopLib
 
             TypeId = id;
         }
+
+        public EntityId CreateNew(int clientId)
+        {
+            if (NextEntityId > MaxEntities)
+                throw new InvalidOperationException("Too many entities created of type: " + Name);
+
+            Owners[NextEntityId] = clientId;
+            return new EntityId(this, NextEntityId++);
+        }
     }
 
     /// <summary>
@@ -33,18 +46,13 @@ namespace LoopLib
     /// </summary>
     public abstract class EntityType<T> : EntityType where T: struct, IEntityState
     {
-        public int MaxEntities { get; private set; }
         public string Name { get; private set; }
         public int BaseSeed { get; private set; }
-        public int NextEntityId { get; private set; }
-        public readonly int[] Owners;
 
-        public EntityType(string name, int maxEntities)
+        public EntityType(string name, int maxEntities) : base(maxEntities)
         {
-            MaxEntities = maxEntities;
             Name = name;
             BaseSeed = name.GetHashCode();
-            Owners = new int[maxEntities];
         }
 
         public sealed override void HandleClientEvent(ClientEvent e, Action<IExecutable> addMutation, IEntityState entityData)
@@ -72,15 +80,6 @@ namespace LoopLib
             result.Y = first.Y * amount + second.Y * (1 - amount);
 
             return result;
-        }
-
-        public EntityId CreateNew(int clientId)
-        {
-            if (NextEntityId > MaxEntities)
-                throw new InvalidOperationException("Too many entities created of type: " + Name);
-
-            Owners[NextEntityId] = clientId;
-            return new EntityId(this, NextEntityId++);
         }
     }
 }
