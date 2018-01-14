@@ -3,22 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using LoopLib;
 
-public class ShellView : MonoBehaviour {
-
-    [Header("Shell Settings")]
-    public int ShellId;
+public class ShellView : Containers.LoopEntity {
 
     [Header("View Settings")]
     public GameObject ExplosionPrefab;
 
-    // Use this for initialization
-    void Start ()
-    {
-        gameObject.SetActive(false);
-	}
-	
-	// Update is called once per frame
-	public void OnUpdate (ClientView view)
+    // Update is called once per frame
+    public override void OnUpdate (ClientView view)
     {
        // var shell = view.Get(GameController.ShellEnityType, ShellId);
         /*if(shell != null)

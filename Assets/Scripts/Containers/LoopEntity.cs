@@ -7,11 +7,27 @@ using Containers;
 
 namespace Containers
 {
-    class LoopEntity : MonoBehaviour
+    public class LoopEntity : MonoBehaviour
     {
         public EntityType Type;
-        public ClientInput Client;
+        public ClientView Client;
 
+        protected LoopLib.EntityId id;
 
+        public virtual void Start()
+        {
+            id = Type.LoopType.CreateNew(Client.ClientId);
+        }
+
+        public void Update()
+        {
+            var view = Client.Client;
+            OnUpdate(view);
+        }
+
+        public virtual void OnUpdate(LoopLib.ClientView view)
+        {
+
+        }
     }
 }
