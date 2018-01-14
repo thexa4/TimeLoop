@@ -628,9 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankId: 1
-  GameController: {fileID: 1944922220}
   Turret: {fileID: 270680963}
-  boom: {fileID: 1900201747203452, guid: 83211fe8ac9916c40a44e32cb0c09a91, type: 2}
+  Explosion: {fileID: 0}
   live: 1
 --- !u!1 &463238309
 GameObject:
@@ -1033,9 +1032,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankId: 0
-  GameController: {fileID: 0}
-  Turret: {fileID: 0}
-  boom: {fileID: 1900201747203452, guid: 83211fe8ac9916c40a44e32cb0c09a91, type: 2}
+  Turret: {fileID: 207918991}
+  Explosion: {fileID: 1242792922055474, guid: 52b62d5696a98f8498c1e6abf33cdcaa, type: 2}
   live: 1
 --- !u!114 &786434539
 MonoBehaviour:
@@ -1321,9 +1319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankId: 0
-  GameController: {fileID: 0}
-  Turret: {fileID: 0}
-  boom: {fileID: 1900201747203452, guid: 83211fe8ac9916c40a44e32cb0c09a91, type: 2}
+  Turret: {fileID: 1009369092}
+  Explosion: {fileID: 1242792922055474, guid: 52b62d5696a98f8498c1e6abf33cdcaa, type: 2}
   live: 1
 --- !u!114 &1274488344
 MonoBehaviour:
@@ -1386,9 +1383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankId: 1
-  GameController: {fileID: 1944922220}
   Turret: {fileID: 638185030}
-  boom: {fileID: 1900201747203452, guid: 83211fe8ac9916c40a44e32cb0c09a91, type: 2}
+  Explosion: {fileID: 0}
   live: 1
 --- !u!1 &1390168704
 GameObject:

@@ -7,11 +7,10 @@ public class TankView : MonoBehaviour
 {
     [Header("Tank Settings")]
     public int TankId;
-    public GameController GameController;
 
     [Header("View Settings")]
     public GameObject Turret;
-    public GameObject boom;
+    public GameObject Explosion;
     
     public bool live = true;
 
@@ -24,7 +23,7 @@ public class TankView : MonoBehaviour
     // Update is called once per frame
     public void OnUpdate(ClientView view)
     {
-        var tank = view.Get(GameController.TankEnityType, TankId);
+       /* var tank = view.Get(GameController.TankEnityType, TankId);
         if (tank != null)
         {
             gameObject.SetActive(true);
@@ -49,6 +48,6 @@ public class TankView : MonoBehaviour
                 go.transform.localPosition = gameObject.transform.localPosition + new Vector3(-0.1f, 0.3f, -1f);
             }
             //gameObject.SetActive(false);
-        }
+        }*/
     }
 }
