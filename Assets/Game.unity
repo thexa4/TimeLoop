@@ -616,7 +616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c484052ecf2ca4bbc88ada14c71106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TankId: 1
+  Type: {fileID: 0}
+  Client: {fileID: 0}
   Turret: {fileID: 270680963}
   ExplosionPrefab: {fileID: 0}
   live: 1
@@ -1014,7 +1015,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c484052ecf2ca4bbc88ada14c71106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TankId: 0
+  Type: {fileID: 0}
+  Client: {fileID: 0}
   Turret: {fileID: 207918991}
   ExplosionPrefab: {fileID: 0}
   live: 1
@@ -1459,7 +1461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c484052ecf2ca4bbc88ada14c71106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TankId: 0
+  Type: {fileID: 0}
+  Client: {fileID: 0}
   Turret: {fileID: 1009369092}
   ExplosionPrefab: {fileID: 0}
   live: 1
@@ -1523,7 +1526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c484052ecf2ca4bbc88ada14c71106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TankId: 1
+  Type: {fileID: 0}
+  Client: {fileID: 0}
   Turret: {fileID: 638185030}
   ExplosionPrefab: {fileID: 0}
   live: 1
@@ -1784,7 +1788,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1901455163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.0000021855694, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963686489}
@@ -1802,7 +1806,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec037acfd0199814dbdb1d6b073773f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShellId: 0
+  Type: {fileID: 0}
+  Client: {fileID: 0}
   ExplosionPrefab: {fileID: 1242792922055474, guid: 52b62d5696a98f8498c1e6abf33cdcaa,
     type: 2}
 --- !u!114 &1901455166
