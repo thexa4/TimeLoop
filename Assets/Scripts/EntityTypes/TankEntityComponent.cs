@@ -120,8 +120,8 @@ public class TankEntity : LoopLib.EntityType<TankData>
                     {
                         X = entityData.Value.X,
                         Y = entityData.Value.Y,
-                        XSpeed = Mathf.Cos(entityData.Value.TurretAngle / 180 * Mathf.PI),
-                        YSpeed = Mathf.Sin(entityData.Value.TurretAngle / 180 * Mathf.PI),
+                        XSpeed = Mathf.Cos(data / 180 * Mathf.PI) * 0.1f,
+                        YSpeed = Mathf.Sin(data / 180 * Mathf.PI) * 0.1f,
                     };
                 },
                 Args = entityData.Value.TurretAngle,

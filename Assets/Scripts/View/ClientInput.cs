@@ -10,15 +10,28 @@ public class ClientInput: MonoBehaviour {
 
     public LoopLib.EntityId? _currentTank;
     public LoopLib.EntityId? _currentShell;
+    
+    private float _spawnCoolDown = -100f;
+    private float _lastFrame = -1;
 
     public void Update()
     {
+        if (ClientView.Wave.LoopWave.FrameNumber <= _lastFrame) return;
+        _lastFrame = ClientView.Wave.LoopWave.FrameNumber;
+
+        if (_currentTank.HasValue && ClientView.Client.Get((TankEntity)_currentTank.Value.Type, _currentTank.Value.Id) == null && Time.time > _spawnCoolDown)
+        {
+            _currentTank = null;
+            _currentShell = null;
+        }
+
         bool newTank = false;
-        if (!_currentTank.HasValue && Input.GetKey(ClientView.ClientId == 0 ? KeyCode.Joystick1Button7 : KeyCode.Joystick2Button7))
+        if (!_currentTank.HasValue && Input.GetKey(ClientView.ClientId == 0 ? KeyCode.Joystick1Button7 : KeyCode.Joystick2Button7) && Time.time > _spawnCoolDown)
         {
             _currentTank = TankEntityType.LoopType.CreateNew(ClientView.ClientId);
             _currentShell = ShellEnityType.LoopType.CreateNew(ClientView.ClientId);
             newTank = true;
+            _spawnCoolDown = Time.time + 3;
         }
 
         if (_currentTank.HasValue)
@@ -37,6 +50,9 @@ public class ClientInput: MonoBehaviour {
             };
             ClientView.Wave.LoopWave.AddClientEvent(inputEvent);
         }
+
+
+ 
     }
 
 }
