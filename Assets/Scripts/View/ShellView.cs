@@ -6,17 +6,10 @@ using LoopLib;
 public class ShellView : Containers.LoopEntity {
 
     [Header("Shell Settings")]
-    public int ShellId;
-
     public GameObject BoomPrefab;
 
-    public void Update()
-    {
-        
-    }
-
     // Update is called once per frame
-    public void OnUpdate (ClientView view)
+    public override void OnUpdate (ClientView view)
     {
        // var shell = view.Get(GameController.ShellEnityType, ShellId);
         /*if(shell != null)

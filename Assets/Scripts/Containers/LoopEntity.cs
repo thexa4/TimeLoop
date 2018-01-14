@@ -10,18 +10,24 @@ namespace Containers
     public class LoopEntity : MonoBehaviour
     {
         public EntityType Type;
-        public ClientInput Client;
+        public ClientView Client;
 
         protected LoopLib.EntityId id;
 
-        public void Start()
+        public virtual void Start()
         {
             id = Type.LoopType.CreateNew(Client.ClientId);
         }
 
         public void Update()
         {
-            var view = Client
+            var view = Client.Client;
+            OnUpdate(view);
+        }
+
+        public virtual void OnUpdate(LoopLib.ClientView view)
+        {
+
         }
     }
 }

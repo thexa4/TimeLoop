@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using LoopLib;
 
-public class TankView : MonoBehaviour
+public class TankView : Containers.LoopEntity
 {
-    [Header("Tank Settings")]
-    public int TankId;
 
     [Header("View Settings")]
     public GameObject Turret;
@@ -15,13 +13,14 @@ public class TankView : MonoBehaviour
     public bool live = true;
 
     // Use this for initialization
-    void Start()
+    public override void Start()
     {
+        base.Start();
         gameObject.SetActive(false);
     }
 
     // Update is called once per frame
-    public void OnUpdate(ClientView view)
+    public override void OnUpdate(ClientView view)
     {
        /* var tank = view.Get(GameController.TankEnityType, TankId);
         if (tank != null)

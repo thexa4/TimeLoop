@@ -11,11 +11,13 @@ namespace LoopLib
         public int TypeId { get; private set; }
         public int MaxEntities { get; private set; }
         public int NextEntityId { get; private set; }
+        public string Name { get; private set; }
         public readonly int[] Owners;
 
-        public EntityType(int maxEntities)
+        public EntityType(string name, int maxEntities)
         {
             TypeId = -1;
+            Name = name;
             Owners = new int[maxEntities];
         }
 
@@ -46,12 +48,10 @@ namespace LoopLib
     /// </summary>
     public abstract class EntityType<T> : EntityType where T: struct, IEntityState
     {
-        public string Name { get; private set; }
         public int BaseSeed { get; private set; }
 
-        public EntityType(string name, int maxEntities) : base(maxEntities)
+        public EntityType(string name, int maxEntities) : base(name, maxEntities)
         {
-            Name = name;
             BaseSeed = name.GetHashCode();
         }
 
