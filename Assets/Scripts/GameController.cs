@@ -52,39 +52,6 @@ public class GameController : MonoBehaviour {
 
     public void Start()
     {
-
-        TankEnityType = new TankEntity();
-        ShellEnityType = new ShellEntity(TankEnityType);
-
-        var tank1 = TankEnityType.CreateNew(0);
-        var tank2 = TankEnityType.CreateNew(1);
-
-        var shell1 = ShellEnityType.CreateNew(0);
-        var shell2 = ShellEnityType.CreateNew(1);
-
-        var mutationEvent1 = new MutationEvent<TankData, TankData>
-        {
-            EntityType = TankEnityType,
-            EntityId = tank1.Id,
-            Mutator = (ref TankData? victim, TankData data, List<IExecutable> mutations) => { victim = data; },
-            Args = new TankData { X = -3, ShellId = shell1 },
-        };
-
-        var mutationEvent2 = new MutationEvent<TankData, TankData>
-        {
-            EntityType = TankEnityType,
-            EntityId = tank2.Id,
-            Mutator = (ref TankData? victim, TankData data, List<IExecutable> mutations) => { victim = data; },
-            Args = new TankData { X = 3, ShellId = shell2},
-        };
-
-        Universe.Frames[0].Mutations.Add(mutationEvent1);
-        Universe.Frames[0].Mutations.Add(mutationEvent2);
-
-        for (int i = 1; i < Universe.Frames.Length; i++)
-        {
-            Universe.Frames[i].InitFrom(Universe.Frames[i - 1]);
-        }
     }
 
     public void Update()
