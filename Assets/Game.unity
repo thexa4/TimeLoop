@@ -618,7 +618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankId: 1
   Turret: {fileID: 270680963}
-  Explosion: {fileID: 0}
+  ExplosionPrefab: {fileID: 0}
   live: 1
 --- !u!1 &463238309
 GameObject:
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankId: 0
   Turret: {fileID: 207918991}
-  Explosion: {fileID: 1242792922055474, guid: 52b62d5696a98f8498c1e6abf33cdcaa, type: 2}
+  ExplosionPrefab: {fileID: 0}
   live: 1
 --- !u!114 &786434539
 MonoBehaviour:
@@ -1352,6 +1352,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1047193602}
+  - component: {fileID: 1047193603}
   m_Layer: 0
   m_Name: Shells
   m_TagString: Untagged
@@ -1373,6 +1374,19 @@ Transform:
   m_Father: {fileID: 276090867}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1047193603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1047193601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3841a0b626ca95844a5f6842b6e3a445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Template: {fileID: 1901455163}
+  CloneAmount: 6
 --- !u!1 &1274361103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,7 +1461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankId: 0
   Turret: {fileID: 1009369092}
-  Explosion: {fileID: 1242792922055474, guid: 52b62d5696a98f8498c1e6abf33cdcaa, type: 2}
+  ExplosionPrefab: {fileID: 0}
   live: 1
 --- !u!114 &1274488344
 MonoBehaviour:
@@ -1511,7 +1525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankId: 1
   Turret: {fileID: 638185030}
-  Explosion: {fileID: 0}
+  ExplosionPrefab: {fileID: 0}
   live: 1
 --- !u!1 &1390168704
 GameObject:
@@ -1754,6 +1768,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1901455164}
+  - component: {fileID: 1901455166}
   - component: {fileID: 1901455165}
   m_Layer: 0
   m_Name: Shell
@@ -1788,7 +1803,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShellId: 0
-  BoomPrefab: {fileID: 0}
+  ExplosionPrefab: {fileID: 1242792922055474, guid: 52b62d5696a98f8498c1e6abf33cdcaa,
+    type: 2}
+--- !u!114 &1901455166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1901455163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9447e0c727a9dc45ba02ff476ac15e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _worldSize: 50
+  _height: 0
+  _positsion: 0
+  _depth: 0
 --- !u!1 &1944922219
 GameObject:
   m_ObjectHideFlags: 0

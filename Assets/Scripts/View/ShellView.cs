@@ -8,7 +8,8 @@ public class ShellView : MonoBehaviour {
     [Header("Shell Settings")]
     public int ShellId;
 
-    public GameObject BoomPrefab;
+    [Header("View Settings")]
+    public GameObject ExplosionPrefab;
 
     // Use this for initialization
     void Start ()
@@ -30,7 +31,7 @@ public class ShellView : MonoBehaviour {
         {
             if (gameObject.activeSelf)
             {
-                var go = GameObject.Instantiate(BoomPrefab);
+                var go = GameObject.Instantiate(ExplosionPrefab);
                 go.transform.SetParent(gameObject.transform.parent, false);
                 go.transform.localPosition = new Vector3(transform.localPosition.x,0f);
 

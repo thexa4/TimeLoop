@@ -10,7 +10,7 @@ public class TankView : MonoBehaviour
 
     [Header("View Settings")]
     public GameObject Turret;
-    public GameObject Explosion;
+    public GameObject ExplosionPrefab;
     
     public bool live = true;
 
