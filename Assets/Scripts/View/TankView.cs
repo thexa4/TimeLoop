@@ -29,6 +29,11 @@ public class TankView : Containers.LoopEntity
         if (tank != null)
         {
             gameObject.SetActive(true);
+            foreach(var body in Bodies)
+            {
+                body.SetActive(false);
+            }
+            Bodies[tank.Value.TankColorId].SetActive(true);
             RadTransfrom.Positsion = tank.Value.X;
             RadTransfrom.Height = tank.Value.Y;
             Turret.transform.localRotation = Quaternion.AngleAxis(tank.Value.TurretAngle, new Vector3(0, 0, 1));

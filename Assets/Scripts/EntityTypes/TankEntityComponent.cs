@@ -11,6 +11,7 @@ public struct TankData : IEntityState
     public float TurretAngle { get; set; }
     public float XSpeed { get; set; }
     public EntityId ShellId { get; set; }
+    public int TankColorId { get; set; }
 }
 
 public class TankEntityComponent : Containers.EntityType
