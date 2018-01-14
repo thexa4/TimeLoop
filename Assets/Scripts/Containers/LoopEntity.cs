@@ -12,11 +12,12 @@ namespace Containers
         public EntityType Type;
         public ClientView Client;
 
-        protected LoopLib.EntityId id;
+        protected int Id { get; private set; }
 
         public virtual void Start()
         {
-            id = Type.LoopType.CreateNew(Client.ClientId);
+            Id = Client.GetNextId(Type.LoopType);
+            gameObject.SetActive(false);
         }
 
         public void Update()

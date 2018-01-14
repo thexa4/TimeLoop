@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Containers
 {
@@ -8,6 +9,14 @@ namespace Containers
         public int ClientId;
 
         public LoopLib.ClientView Client { get; private set; }
+        private Dictionary<LoopLib.EntityType, int> nextIds = new Dictionary<LoopLib.EntityType, int>();
+
+        public int GetNextId(LoopLib.EntityType type)
+        {
+            if (!nextIds.ContainsKey(type))
+                nextIds.Add(type, 0);
+            return nextIds[type]++;
+        }
 
         public void Update()
         {
