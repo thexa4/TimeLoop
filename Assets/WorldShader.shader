@@ -57,11 +57,6 @@ Shader "Draw/WorldShader"
 			
 			sampler2D _MainTex;
 
-			float3 distance_cylinder(float3 position, float radius)
-			{
-				return length(position.xy) - radius;
-			}
-
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float rayStart = _WorldSpaceCameraPos;
@@ -72,25 +67,6 @@ Shader "Draw/WorldShader"
 				viewVertex.z = 0;
 
 
-				float raylength = 10;
-				
-
-
-				//fixed4 col = tex2D(_MainTex, i.uv);
-				// just invert the colors
-				//col = 1 - col;
-				//return col;
-				//return float4(i.vertex.x / 1024, i.vertex.y, 0, 1);
-				//return float4(offsets.x, offsets.y, 0, 1);
-				//return vertex;
-
-				float distance = distance_cylinder(rayStart, 2) / 1000;
-				//return float4(distance, distance, distance, 0);
-
-				float3 near = unity_CameraWorldClipPlanes[4].xyz;
-				float3 far = unity_CameraWorldClipPlanes[5].xyz;
-
-				float3 direction = far - near;
 
 				//  return float4(distance_cylinder(i.rayEnd - i.rayDirection, 0), 1);
 
@@ -104,14 +80,17 @@ Shader "Draw/WorldShader"
 
 				float4 relativeLightDirection = normalize(samplePos - lightpos);
 				
-				//return lightpos;
-				float sunIntensity = dot(relativeLightDirection, i.normal);
+				float3 pertubedNormal = normalize(i.worldNormal);
 
-				float surfaceAngle = dot(i.worldNormal, -normalize(i.rayDirection));
+				float sunIntensity = dot(relativeLightDirection, i.normal);
+				float surfaceAngle = dot(pertubedNormal, -normalize(i.rayDirection));
 				//return surfaceAngle;
 
+				float angle = dot(float3(0, 0, -1), normalize(float3(i.objectPos.x, 0, i.objectPos.z))) + 1;
+				float textureIntensity = (sin(angle * 97.7 + i.objectPos.y * 300) + 1) / 2 / 4 + 0.75;
+
 				float4 color = sunIntensity * float4(1, 1, 1, 1) + (1 - sunIntensity) * float4(0.55, 0.55, 0.8, 1);
-				return surfaceAngle * color;
+				return surfaceAngle * textureIntensity * color;
 
 				//return float4(i.rayDirection, 1);
 			}
