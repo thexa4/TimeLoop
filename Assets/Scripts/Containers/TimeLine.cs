@@ -7,7 +7,7 @@ using Containers;
 
 namespace Containers
 {
-    class TimeLine : MonoBehaviour
+    public class TimeLine : MonoBehaviour
     {
         public int TickRate;
         public int TotalGameSeconds;

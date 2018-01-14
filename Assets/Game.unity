@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03cd5fea2acf82419033faa2f120070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameController: {fileID: 1944922220}
+  Wave: {fileID: 0}
   ClientId: 1
   Tanks:
   - {fileID: 344296739}
@@ -585,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03cd5fea2acf82419033faa2f120070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameController: {fileID: 1944922220}
+  Wave: {fileID: 1274361105}
   ClientId: 0
   Tanks:
   - {fileID: 0}
@@ -977,7 +977,7 @@ Prefab:
         type: 2}
       propertyPath: GameController
       value: 
-      objectReference: {fileID: 1944922220}
+      objectReference: {fileID: 0}
     - target: {fileID: 1207639938348056, guid: 71b3cc59fd557e74299df59e114e911e, type: 2}
       propertyPath: m_Name
       value: Shell2
@@ -1128,7 +1128,7 @@ Prefab:
         type: 2}
       propertyPath: GameController
       value: 
-      objectReference: {fileID: 1944922220}
+      objectReference: {fileID: 0}
     - target: {fileID: 1060391696133020, guid: b239d7972e1dfed4c9f1db625d4fa06b, type: 2}
       propertyPath: m_Name
       value: Tank1
@@ -1288,6 +1288,48 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1274361103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1274361104}
+  - component: {fileID: 1274361105}
+  m_Layer: 0
+  m_Name: Wave1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274361104
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1274361103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1944922221}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1274361105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1274361103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00005ed72ccb589489c2f574fe60f723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeLine: {fileID: 1944922223}
+  GameTime: 0
 --- !u!1 &1274488342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1669,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1944922221}
+  - component: {fileID: 1944922223}
+  - component: {fileID: 1944922222}
   - component: {fileID: 1944922220}
   m_Layer: 0
   m_Name: GameController
@@ -1643,9 +1687,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1944922219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d85dafd4ecc48d2896ee1863ceda4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 166cbfbf9d5be441e8ea846134cfdeb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxEntities: 6
 --- !u!4 &1944922221
 Transform:
   m_ObjectHideFlags: 0
@@ -1653,12 +1698,86 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1944922219}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5878115, y: 1.2835939, z: -0.067881405}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1274361104}
+  - {fileID: 2000047651}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944922222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1944922219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b92b4f965cb79f341866eddd4e1801a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxEntities: 12
+  TankEntity: {fileID: 1944922220}
+--- !u!114 &1944922223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1944922219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09287728f0b222440a001d9e47f93dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TickRate: 20
+  TotalGameSeconds: 60
+  LagCompensationFrames: 6
+  EntityTypes:
+  - {fileID: 1944922222}
+  - {fileID: 1944922222}
+--- !u!1 &2000047650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2000047651}
+  - component: {fileID: 2000047652}
+  m_Layer: 0
+  m_Name: Wave2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2000047651
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2000047650}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1944922221}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2000047652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2000047650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00005ed72ccb589489c2f574fe60f723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeLine: {fileID: 1944922223}
+  GameTime: 30
 --- !u!1 &2033252669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,7 +1973,7 @@ Prefab:
         type: 2}
       propertyPath: GameController
       value: 
-      objectReference: {fileID: 1944922220}
+      objectReference: {fileID: 0}
     - target: {fileID: 1207639938348056, guid: 71b3cc59fd557e74299df59e114e911e, type: 2}
       propertyPath: m_Name
       value: Shell1
@@ -1949,7 +2068,7 @@ Prefab:
         type: 2}
       propertyPath: GameController
       value: 
-      objectReference: {fileID: 1944922220}
+      objectReference: {fileID: 0}
     - target: {fileID: 1060391696133020, guid: b239d7972e1dfed4c9f1db625d4fa06b, type: 2}
       propertyPath: m_Name
       value: Tank2

@@ -25,5 +25,11 @@ namespace Containers
                 return _loopWave;
             }
         }
+
+        public void Update()
+        {
+            LoopWave.GameTime += Time.deltaTime;
+        }
+
     }
 }
