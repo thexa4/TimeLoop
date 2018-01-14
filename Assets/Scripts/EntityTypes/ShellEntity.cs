@@ -11,11 +11,21 @@ public struct ShellData : IEntityState
     public float YSpeed { get; set; }
 }
 
+public class ShellEntityComponent : Containers.EntityType
+{
+    public TankEntityComponent TankEntity;
+
+    public override EntityType CreateType()
+    {
+        return new ShellEntity(TankEntity.LoopType as TankEntity, MaxEntities);
+    }
+}
+
 public class ShellEntity : EntityType<ShellData>
 {
     private TankEntity tankEntityType;
 
-    public ShellEntity(TankEntity tankEntityType) : base("ShellEntity", 4)
+    public ShellEntity(TankEntity tankEntityType, int maxEntities) : base("ShellEntity", maxEntities)
     {
         this.tankEntityType = tankEntityType;
     }

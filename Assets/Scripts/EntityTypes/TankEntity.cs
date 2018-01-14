@@ -13,9 +13,17 @@ public struct TankData : IEntityState
     public EntityId ShellId { get; set; }
 }
 
+public class TankEntityComponent : Containers.EntityType
+{
+    public override EntityType CreateType()
+    {
+        return new TankEntity(MaxEntities);
+    }
+}
+
 public class TankEntity : LoopLib.EntityType<TankData>
 {
-    public TankEntity() : base("TankEntity", 2)
+    public TankEntity(int maxEntities) : base("TankEntity", maxEntities)
     {
     }
 

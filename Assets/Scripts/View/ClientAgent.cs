@@ -5,25 +5,18 @@ using LoopLib;
 
 public class ClientAgent: MonoBehaviour {
 
-    public GameController GameController;
-
+    public Containers.Wave Wave;
     public int ClientId;
 
     public TankView[] Tanks;
     public ShellView[] Shells;
 
     private Wave wave;
-
-    public void Start()
-    {
-        wave = GameController.Waves[0];
-    }
+    
 
     public void Update()
     {
-        Universe universe = GameController.Universe;
-
-        var view = new ClientView(universe, wave.GameTime, ClientId);
+        var view = new ClientView(Wave.LoopWave.Universe, wave.GameTime, ClientId);
         
         foreach (TankView tank in Tanks)
         {
